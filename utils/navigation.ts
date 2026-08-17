@@ -5,13 +5,13 @@ import {
     LucideInfo,
     LucideMap,
     LucidePhone,
-    type LucideIcon // 🟢 Import LucideIcon type ມາໃຊ້
+    type LucideIcon
 } from "lucide-react";
 
 export type NavChild = {
     name: string;
     href: string;
-    icon: LucideIcon; // 🟢 ປ່ຽນຈາກ IconType ເປັນ LucideIcon
+    icon: LucideIcon;
     isActive: boolean;
 };
 

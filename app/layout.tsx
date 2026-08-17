@@ -4,8 +4,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { organizationSchema } from "@/libs/schema";
 import HeaderPage from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-
-const SITE_URL = "https://www.brothertours.com";
+import { SITE_URL } from "@/utils/variable";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

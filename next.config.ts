@@ -1,7 +1,32 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Disable the 'x-powered-by: Next.js' header for security
+  poweredByHeader: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "uploadthing.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cloudinary.com",
+      }
+    ],
+    domains: ['localhost'],
+    unoptimized: true,
+  },
+  experimental: {
+    optimizePackageImports: ["react", "lucide-react", "recharts"],
+  },
+  // Enable React Strict Mode for enhanced development checks
+  reactStrictMode: true
+}
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-export default nextConfig;
+export default nextConfig

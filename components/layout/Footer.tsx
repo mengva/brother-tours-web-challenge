@@ -11,6 +11,8 @@ import {
 import BrotherTourLogoPage from '../BrotherTourLogo';
 import { FaFacebook } from 'react-icons/fa';
 import { BsInstagram, BsWhatsapp, BsYoutube } from 'react-icons/bs';
+import { navigationList } from '@/utils/navigation';
+import BrotherTourLogoLinkPage from '../BrotherTourLogo';
 
 export default function FooterPage() {
     const currentYear = new Date().getFullYear();
@@ -59,17 +61,7 @@ export default function FooterPage() {
 
                     {/* Brand Info */}
                     <div className="lg:col-span-2 space-y-4">
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <BrotherTourLogoPage width={80} height={80} />
-                            <div className="flex flex-col">
-                                <span className="text-xl font-black tracking-tight text-white group-hover:text-amber-500 transition-colors">
-                                    BROTHER<span className="text-amber-500">TOURS</span>
-                                </span>
-                                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
-                                    Travel & Experiences
-                                </span>
-                            </div>
-                        </Link>
+                        <BrotherTourLogoLinkPage width={80} height={80}/>
 
                         <p className="text-sm text-slate-400 leading-relaxed pr-4">
                             Explore authentic travel experiences across Laos and Southeast Asia with local experts. Unforgettable memories start here.
@@ -113,13 +105,13 @@ export default function FooterPage() {
                             Quick Links
                         </h4>
                         <ul className="space-y-2.5 text-sm">
-                            {['Home', 'Tours', 'Destinations', 'Travel Guide', 'About Us', 'Contact'].map((item) => (
-                                <li key={item}>
+                            {navigationList.map((item) => (
+                                <li key={item.name}>
                                     <Link
-                                        href={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                        href={`/${item.name.toLowerCase().replace(/\s+/g, '-')}`}
                                         className="hover:text-amber-500 transition-colors"
                                     >
-                                        {item}
+                                        {item.name}
                                     </Link>
                                 </li>
                             ))}

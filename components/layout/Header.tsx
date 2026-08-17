@@ -11,11 +11,10 @@ import {
   Menu,
   X,
   ChevronDown,
-  PhoneCall,
   Calendar
 } from 'lucide-react';
-import BrotherTourLogoPage from '../BrotherTourLogo';
 import { navigationList } from '@/utils/navigation';
+import BrotherTourLogoLinkPage from '../BrotherTourLogo';
 
 export default function HeaderPage() {
   const pathname = usePathname();
@@ -39,17 +38,7 @@ export default function HeaderPage() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
 
         {/* 1. Logo Section */}
-        <Link href="/" className="flex items-center gap-2 group outline-none border-none">
-          <BrotherTourLogoPage width={100} height={100} />
-          <div className="flex flex-col">
-            <span className="text-xl font-black tracking-tight text-slate-900 group-hover:text-amber-600 transition-colors">
-              BROTHER<span className="text-amber-500">TOURS</span>
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-slate-400 font-semibold">
-              Travel & Experiences
-            </span>
-          </div>
-        </Link>
+        <BrotherTourLogoLinkPage width={100} height={100} />
 
         {/* 2. Desktop Radix Navigation Menu */}
         <NavigationMenu.Root className="relative z-10 hidden md:flex items-center justify-center">
@@ -65,8 +54,8 @@ export default function HeaderPage() {
                   <NavigationMenu.Item key={item.name} className="relative">
                     <NavigationMenu.Trigger
                       className={`group flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full transition-colors cursor-pointer outline-none ${active
-                          ? 'text-amber-600 bg-amber-50'
-                          : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
+                        ? 'text-amber-600 bg-amber-50'
+                        : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
                         }`}
                     >
                       <Icon className="h-4 w-4" />
@@ -89,8 +78,8 @@ export default function HeaderPage() {
                               key={index}
                               href={child.href}
                               className={`p-2 text-sm font-medium ${isChildActive
-                                  ? 'text-amber-600 bg-amber-50'
-                                  : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
+                                ? 'text-amber-600 bg-amber-50'
+                                : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
                                 } rounded-lg transition-colors flex items-center gap-2.5`}
                             >
                               <Compass className="h-4 w-4 text-emerald-600" />
@@ -109,8 +98,8 @@ export default function HeaderPage() {
                   <Link
                     href={item.href}
                     className={`flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-full transition-colors ${active
-                        ? 'text-amber-600 bg-amber-50'
-                        : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
+                      ? 'text-amber-600 bg-amber-50'
+                      : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
                       }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -175,8 +164,8 @@ export default function HeaderPage() {
                           <Collapsible.Trigger asChild className="w-full">
                             <button
                               className={`flex items-center justify-between w-full px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${active
-                                  ? 'text-amber-600 bg-amber-50'
-                                  : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50'
+                                ? 'text-amber-600 bg-amber-50'
+                                : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50'
                                 }`}
                             >
                               <div className="flex items-center gap-3">
@@ -199,8 +188,8 @@ export default function HeaderPage() {
                                   href={child.href}
                                   onClick={() => setMobileMenuOpen(false)}
                                   className={`py-2 px-2 text-sm font-semibold rounded-lg transition-colors flex items-center gap-2 ${isChildActive
-                                      ? 'text-amber-600 bg-amber-50/50'
-                                      : 'text-slate-600 hover:text-amber-600'
+                                    ? 'text-amber-600 bg-amber-50/50'
+                                    : 'text-slate-600 hover:text-amber-600'
                                     }`}
                                 >
                                   <Compass className="h-4 w-4 text-emerald-600" />
@@ -219,8 +208,8 @@ export default function HeaderPage() {
                         href={item.href}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-bold transition-colors ${active
-                            ? 'text-amber-600 bg-amber-50'
-                            : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50'
+                          ? 'text-amber-600 bg-amber-50'
+                          : 'text-slate-700 hover:text-amber-600 hover:bg-slate-50'
                           }`}
                       >
                         <Icon className="h-5 w-5 text-amber-500" />
