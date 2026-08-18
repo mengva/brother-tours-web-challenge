@@ -8,7 +8,6 @@ import {
     Mail,
     Send,
 } from 'lucide-react';
-import BrotherTourLogoPage from '../BrotherTourLogo';
 import { FaFacebook } from 'react-icons/fa';
 import { BsInstagram, BsWhatsapp, BsYoutube } from 'react-icons/bs';
 import { navigationList } from '@/utils/navigation';
@@ -22,7 +21,7 @@ export default function FooterPage() {
             {/* 1. Top Newsletter / CTA Section */}
             <div className="border-b border-slate-800 bg-slate-900/50">
                 <div className="container mx-auto px-4 py-12 md:px-8">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 rounded-3xl bg-gradient-to-r from-amber-500/10 via-emerald-500/5 to-transparent p-6 md:p-10 border border-slate-800">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-6 rounded-3xl bg-linear-to-r from-amber-500/10 via-emerald-500/5 to-transparent p-6 md:p-10 border border-slate-800">
                         <div className="space-y-2 text-center md:text-left">
                             <h3 className="text-2xl font-black text-white tracking-tight">
                                 Ready for your next adventure?

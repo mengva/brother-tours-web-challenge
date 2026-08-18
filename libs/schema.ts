@@ -5,8 +5,26 @@
 // read JSON-LD directly — it's the cleanest signal we can give them).
 // ─────────────────────────────────────────────────────────────
 
-const SITE_URL = "https://www.brothertours.com";
-const ORG_NAME = "Brother Tours";
+import { DestinationDto } from "@/types/destination";
+import { TourDto } from "@/types/tour";
+import { ORG_NAME, SITE_URL } from "@/utils/variable";
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const formatUrl = (path: string) => {
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  const cleanBase = SITE_URL.endsWith("/") ? SITE_URL.slice(0, -1) : SITE_URL;
+  return `${cleanBase}${cleanPath}`;
+};
 
 export function organizationSchema() {
   return {
@@ -14,7 +32,7 @@ export function organizationSchema() {
     "@type": "TravelAgency",
     name: ORG_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    logo: formatUrl("/logo.png"),
     sameAs: [
       "https://www.facebook.com/brothertours",
       "https://www.instagram.com/brothertours",
@@ -22,7 +40,28 @@ export function organizationSchema() {
   };
 }
 
-export function breadcrumbSchema(items: { name: string; url: string }[]) {
+/**
+ * Generates Schema.org TouristDestination structured data
+ */
+export function destinationSchema(destination: DestinationDto) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    name: destination.name,
+    description: destination.description,
+    image: destination.heroImage,
+    url: formatUrl(`/destinations/${destination.slug}`),
+    ...(destination.popularSpots &&
+      destination.popularSpots.length > 0 && {
+        includesAttraction: destination.popularSpots.map((spot) => ({
+          "@type": "TouristAttraction",
+          name: spot,
+        })),
+      }),
+  };
+}
+
+export function breadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -30,12 +69,12 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `${SITE_URL}${item.url}`,
+      item: formatUrl(item.url),
     })),
   };
 }
 
-export function faqSchema(qa: { question: string; answer: string }[]) {
+export function faqSchema(qa: FAQItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -52,46 +91,49 @@ export function faqSchema(qa: { question: string; answer: string }[]) {
 
 // Core schema for a tour page. Uses TouristTrip (the correct type for
 // guided tour products) rather than generic Product.
-export function tourSchema(tour: {
-  name: string;
-  slug: string;
-  description: string;
-  image: string;
-  durationDays: number;
-  priceFrom: number;
-  currency: string;
-  destination: string;
-  ratingValue?: number;
-  reviewCount?: number;
-}) {
+export function tourSchema(tour: TourDto) {
+  // Extract numbers from price string (e.g., "$1,250" -> "1250")
+  const numericPrice = tour.price.replace(/[^0-9.]/g, "");
+
+  // Extract days for ISO 8601 duration standard (e.g., "10 Days" -> "P10D")
+  const durationMatch = tour.duration.match(/\d+/);
+  const durationDays = durationMatch ? durationMatch[0] : "1";
+
   return {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
-    name: tour.name,
-    description: tour.description,
+    name: tour.title,
+    description: tour.description || "",
     image: tour.image,
-    url: `${SITE_URL}/tours/${tour.destination}/${tour.slug}`,
+    url: formatUrl(`/tours/${tour.id}`),
+    touristType: ["Cultural Enthusiast", "Explorer"],
+    duration: `P${durationDays}D`,
     provider: {
       "@type": "TravelAgency",
       name: ORG_NAME,
       url: SITE_URL,
     },
-    itinerary: {
-      "@type": "ItemList",
-      numberOfItems: tour.durationDays,
-    },
     offers: {
       "@type": "Offer",
-      priceCurrency: tour.currency,
-      price: tour.priceFrom,
+      priceCurrency: "USD",
+      price: numericPrice,
       availability: "https://schema.org/InStock",
+      url: formatUrl(`/tours/${tour.id}`),
     },
-    ...(tour.ratingValue && {
+    ...(tour.rating && {
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: tour.ratingValue,
-        reviewCount: tour.reviewCount ?? 1,
+        ratingValue: tour.rating,
+        reviewCount: tour.reviews,
       },
+    }),
+    ...(tour.itinerary && tour.itinerary.length > 0 && {
+      itinerary: tour.itinerary.map((item) => ({
+        "@type": "ListItem",
+        position: item.day,
+        name: `Day ${item.day}: ${item.title}`,
+        description: item.description,
+      })),
     }),
   };
 }

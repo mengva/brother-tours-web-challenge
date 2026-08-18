@@ -115,7 +115,7 @@ export default function HeaderPage() {
         <div className="hidden md:flex items-center gap-4">
 
           <Link
-            href="/tours/10-day-laos-cultural-discovery"
+            href="/tours"
             className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-linear-to-r from-amber-500 to-emerald-600 text-white text-sm font-bold shadow-md shadow-amber-500/20 hover:brightness-110 active:scale-95 transition-all"
           >
             <Calendar className="h-4 w-4" />
@@ -223,7 +223,7 @@ export default function HeaderPage() {
               {/* Mobile CTA */}
               <div className="pt-6 border-t border-slate-100 flex flex-col gap-3">
                 <Link
-                  href="/tours/10-day-laos-cultural-discovery"
+                  href="/tours"
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 text-center rounded-xl bg-amber-500 text-white font-bold shadow-lg shadow-amber-500/20 active:scale-95 transition-all"
                 >

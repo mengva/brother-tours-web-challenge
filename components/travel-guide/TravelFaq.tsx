@@ -34,7 +34,7 @@ export default function TravelFaqTravelGuidePage({ faqs = defaultFaqs }: { faqs?
                 {faqs.map((faq, idx) => (
                     <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-2">
                         <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
-                            <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                             {faq.question}
                         </h3>
                         <p className="text-slate-600 text-sm pl-7 leading-relaxed">{faq.answer}</p>

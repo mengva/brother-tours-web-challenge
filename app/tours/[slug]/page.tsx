@@ -1,68 +1,72 @@
-// src/app/tours/[slug]/page.tsx
-import JsonLd from '@/components/seo/JsonLd';
+import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import JsonLd from '@/components/seo/JsonLd';
+import { SITE_URL } from '@/utils/variable';
+import { tours } from '@/libs/data/tour';
+import TourDetailComponentPage from '@/components/tours/slug/TourDetail';
+import { breadcrumbSchema, tourSchema } from '@/libs/schema';
 
-// 1. Dynamic Metadata สำหรับ SEO (Og-Image, Title, Description)
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    // Fetch tour data ຈາກ BTMS API / Database
-    // const tour = await getTourBySlug(params.slug);
+interface PageProps {
+    params: Promise<{ slug: string }>;
+}
+
+// Helper to look up tour by ID or slug match
+function getTourBySlug(slug: string) {
+    return tours.find(
+        (tour) =>
+            tour.id === slug ||
+            tour.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === slug
+    );
+}
+
+// 1. Dynamic Metadata for SEO
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const tour = getTourBySlug(slug);
+
+    if (!tour) {
+        return {
+            title: 'Tour Not Found | Brother Tours',
+        };
+    }
 
     return {
-        title: `10-Day Laos Cultural Discovery Tour | Brother Tours`,
-        description: `Explore ancient temples, Luang Prabang, and rich Lao heritage on our 10-day cultural discovery tour.`,
+        title: `${tour.title} | Brother Tours`,
+        description: tour.description,
         alternates: {
-            canonical: `https://brothertours.com/tours/${params.slug}`,
+            canonical: `${SITE_URL}/tours/${slug}`,
         },
         openGraph: {
-            title: `10-Day Laos Cultural Discovery Tour`,
-            description: `Explore ancient temples, Luang Prabang, and rich Lao heritage.`,
-            url: `https://brothertours.com/tours/${params.slug}`,
-            images: ['/images/tours/laos-cultural-discovery.jpg'],
+            title: `${tour.title} | Brother Tours`,
+            description: tour.description,
+            url: `${SITE_URL}/tours/${slug}`,
+            images: [tour.image],
         },
     };
 }
 
-export default async function TourDetailPage({ params }: { params: { slug: string } }) {
-    // Data สมมุติที่ดึงมาจาก BTMS
-    const tourData = {
-        name: "10-Day Laos Cultural Discovery Tour",
-        description: "Immerse yourself in the cultural heart of Laos with expert local guides.",
-        price: "1250",
-        currency: "USD",
-        slug: params.slug,
-    };
+export default async function TourDetailPage({ params }: PageProps) {
+    const { slug } = await params;
+    const tour = getTourBySlug(slug);
 
-    // 2. AEO & GEO Structured Data (JSON-LD)
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "TouristTrip",
-        "name": tourData.name,
-        "description": tourData.description,
-        "touristType": ["Cultural Enthusiast", "Explorer"],
-        "offers": {
-            "@type": "Offer",
-            "price": tourData.price,
-            "priceCurrency": tourData.currency,
-            "availability": "https://schema.org/InStock",
-            "url": `https://brothertours.com/tours/${tourData.slug}`
-        },
-        "provider": {
-            "@type": "TravelAgency",
-            "name": "Brother Tours",
-            "url": "https://brothertours.com"
-        }
-    };
+    if (!tour) {
+        notFound();
+    }
+
+    // Generate structured data using reusable functions
+    const breadcrumbsJsonLd = breadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Tours", url: "/tours" },
+        { name: tour.title, url: `/tours/${tour.id}` },
+    ]);
+
+    const tourJsonLd = tourSchema(tour);
 
     return (
         <>
-            {/* 🤖 SCRIPT Inject JSON-LD สำรับ AI Search (Perplexity/Gemini/ChatGPT) & Google */}
-            <JsonLd data={jsonLd}/>
-
-            <main className="container mx-auto py-10 px-4">
-                {/* UI ຂອງหน้า 10-Day Laos Cultural Discovery Tour */}
-                <h1 className="text-4xl font-bold">{tourData.name}</h1>
-                {/* ... Sections อื่นๆ ของ BTMS ... */}
-            </main>
+            <JsonLd data={breadcrumbsJsonLd} />
+            <JsonLd data={tourJsonLd} />
+            <TourDetailComponentPage tour={tour} />
         </>
     );
 }
