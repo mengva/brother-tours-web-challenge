@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import JsonLd from "@/components/seo/JsonLd";
-import { organizationSchema } from "@/libs/schema";
+import { organizationSchema } from "@/utils/schema";
 import HeaderPage from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { SITE_URL } from "@/utils/variable";

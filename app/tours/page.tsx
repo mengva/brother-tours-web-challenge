@@ -1,16 +1,38 @@
+import JsonLd from '@/components/seo/JsonLd';
 import TourComponentPage from '@/components/tours/Tour';
 import { tours } from '@/libs/data/tour';
+import { breadcrumbSchema, tourListSchema } from '@/utils/schema';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: "All Tours",
-    description: "Browse all Brother Tours tour packages by category.",
+    description: "Browse all Brother Tours tour packages.",
     alternates: { canonical: "/tours" },
 };
 
+// 1. Breadcrumbs Schema (Home -> Tours)
+const breadcrumbsJsonLd = breadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Tours", url: "/tours" },
+]);
+
+// 2. ItemList Schema ສໍາລັບໜ້າ Listing
+const tourListJsonLd = tourListSchema(
+    "Popular All Tour Packages",
+    tours.map((tour) => ({
+        name: tour.title,
+        url: `/tours/${tour.id}`,
+    }))
+);
+
 function TourPage() {
+
     return (
-        <div>
+        <>
+            {/* Inject Structured Data */}
+            <JsonLd data={breadcrumbsJsonLd} />
+            <JsonLd data={tourListJsonLd} />
+
             {/* 3. FEATURED TOURS */}
             <section className="py-12 bg-white border-y border-slate-100">
                 <div className="container mx-auto px-4 md:px-8">
@@ -30,7 +52,7 @@ function TourPage() {
                     </div>
                 </div>
             </section>
-        </div>
+        </>
     )
 }
 

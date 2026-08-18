@@ -14,9 +14,23 @@ export interface BreadcrumbItem {
   url: string;
 }
 
+export interface ItemListItem {
+  name: string;
+  url: string;
+}
+
 export interface FAQItem {
   question: string;
   answer: string;
+}
+
+export interface ContactInfo {
+  phone?: string;
+  email?: string;
+  address?: string;
+  city?: string;
+  country?: string;
+  socialLinks?: string[]; // Array of social media URLs
 }
 
 const formatUrl = (path: string) => {
@@ -26,17 +40,41 @@ const formatUrl = (path: string) => {
   return `${cleanBase}${cleanPath}`;
 };
 
-export function organizationSchema() {
+/**
+ * Generates Organization / TravelAgency schema with social media links
+ */
+export function organizationSchema(info?: ContactInfo) {
+  // Default social media links (or pass them dynamically via `info`)
+  const defaultSocialLinks = [
+    "https://www.facebook.com/brothertours",
+    "https://www.instagram.com/brothertours",
+    "https://www.tiktok.com/@brothertours",
+  ];
+
+  const socialLinks = info?.socialLinks ?? defaultSocialLinks;
+
   return {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
-    name: ORG_NAME,
-    url: SITE_URL,
-    logo: formatUrl("/logo.png"),
-    sameAs: [
-      "https://www.facebook.com/brothertours",
-      "https://www.instagram.com/brothertours",
-    ],
+    name: "Brother Tours",
+    url: formatUrl("/"),
+    logo: formatUrl("../public/images/brother_tours.png"),
+    description: "Your trusted tour operator in Laos.",
+    sameAs: socialLinks, // Schema.org property for social profiles
+    ...(info?.phone || info?.email || info?.address
+      ? {
+        ...(info.phone && { telephone: info.phone }),
+        ...(info.email && { email: info.email }),
+        ...(info.address && {
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: info.address,
+            addressLocality: info.city,
+            addressCountry: info.country || "LA",
+          },
+        }),
+      }
+      : {}),
   };
 }
 
@@ -53,11 +91,11 @@ export function destinationSchema(destination: DestinationDto) {
     url: formatUrl(`/destinations/${destination.slug}`),
     ...(destination.popularSpots &&
       destination.popularSpots.length > 0 && {
-        includesAttraction: destination.popularSpots.map((spot) => ({
-          "@type": "TouristAttraction",
-          name: spot,
-        })),
-      }),
+      includesAttraction: destination.popularSpots.map((spot) => ({
+        "@type": "TouristAttraction",
+        name: spot,
+      })),
+    }),
   };
 }
 
@@ -135,5 +173,38 @@ export function tourSchema(tour: TourDto) {
         description: item.description,
       })),
     }),
+  };
+}
+
+/**
+ * Generates Schema.org ItemList structured data for listing pages
+ */
+export function tourListSchema(name: string, items: ItemListItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "TourList",
+    name,
+    numberOfItems: items.length,
+    tourListElement: items.map((item, index) => ({
+      "@type": "TourList",
+      position: index + 1,
+      name: item.name,
+      url: formatUrl(item.url),
+    })),
+  };
+}
+
+export function destinationListSchema(name: string, items: ItemListItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DestinationList",
+    name,
+    numberOfItems: items.length,
+    destinationListElement: items.map((item, index) => ({
+      "@type": "DestinationList",
+      position: index + 1,
+      name: item.name,
+      url: formatUrl(item.url),
+    })),
   };
 }

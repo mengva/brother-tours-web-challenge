@@ -3,6 +3,8 @@ import InquiryFormContactPage from "@/components/contact/InquiryFormContact";
 import ContactInfoCardPage from "@/components/contact/ContactInfoCard";
 import HeroHeaderContactPage from "@/components/contact/HeroHeader";
 import { SITE_URL } from "@/utils/variable";
+import { breadcrumbSchema, organizationSchema } from "@/utils/schema";
+import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Contact Us & Tour Inquiry | Brother Tour Laos",
@@ -26,25 +28,48 @@ export const metadata: Metadata = {
   },
 };
 
+const breadcrumbsJsonLd = breadcrumbSchema([
+  { name: "Home", url: "/" },
+  { name: "Contact Us", url: "/contact" },
+]);
+
+const organizationJsonLd = organizationSchema({
+  phone: "+856 20 1234 5678",
+  email: "contact@brothertours.com",
+  address: "Lane Xang Avenue",
+  city: "Vientiane",
+  socialLinks: [
+    "https://facebook.com/your-page",
+    "https://instagram.com/your-profile",
+    "https://tiktok.com/@your-handle",
+    "https://youtube.com/@your-channel",
+  ],
+});
+
 export default function BrotherTourContactPage() {
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
-      {/* Hero Header */}
-      <HeroHeaderContactPage />
+    <>
+      <JsonLd data={breadcrumbsJsonLd} />
+      <JsonLd data={organizationJsonLd} />
 
-      {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div className="min-h-screen bg-slate-50 text-slate-800">
+        {/* Hero Header */}
+        <HeroHeaderContactPage />
 
-          {/* Left Column: Contact Info Cards */}
-          <ContactInfoCardPage />
+        {/* Main Content */}
+        <section className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
-          {/* Right Column: Interactive Booking & Inquiry Form */}
-          <InquiryFormContactPage />
+            {/* Left Column: Contact Info Cards */}
+            <ContactInfoCardPage />
 
-        </div>
-      </section>
-    </div>
+            {/* Right Column: Interactive Booking & Inquiry Form */}
+            <InquiryFormContactPage />
+
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

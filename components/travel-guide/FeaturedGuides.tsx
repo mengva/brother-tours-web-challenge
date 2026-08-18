@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Clock, ArrowRight } from "lucide-react";
-import { GuideItem, travelGuidesList } from "@/libs/data/travel-guide";
+import { travelGuidesList } from "@/libs/data/travel-guide";
+import { GuideCardDto } from "@/types/travel-guide";
 
-export default function FeaturedGuidesPage({ guides = travelGuidesList }: { guides?: GuideItem[] }) {
+export default function FeaturedGuidesPage({ guides = travelGuidesList }: { guides?: GuideCardDto[] }) {
     return (
         <section className="bg-white py-16 border-y border-slate-100">
             <div className="max-w-7xl mx-auto px-6 space-y-12">
