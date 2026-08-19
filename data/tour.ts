@@ -11,6 +11,7 @@ export const tours: TourDto[] = [
         rating: 4.9,
         reviews: 128,
         price: '$1,250',
+        priceNumber: 1250,
         description: 'Immerse yourself in the rich culture, stunning limestone karsts, and ancient temples of Laos across three iconic cities.',
         highlights: [
             'Morning Alms Giving ceremony in Luang Prabang',
@@ -35,6 +36,7 @@ export const tours: TourDto[] = [
         rating: 4.8,
         reviews: 86,
         price: '$450',
+        priceNumber: 450,
         description: 'Experience an action-packed getaway through Vang Vieng’s famous turquoise lagoons, limestone caves, and scenic riverways.',
         highlights: [
             'Hot air balloon ride over Vang Vieng karsts',
@@ -58,6 +60,7 @@ export const tours: TourDto[] = [
         rating: 5.0,
         reviews: 42,
         price: '$790',
+        priceNumber: 790,
         description: 'Discover the peaceful beauty of Southern Laos, from the lush Bolaven Plateau waterfalls to the serene islands of the Mekong River.',
         highlights: [
             'Wat Phou UNESCO World Heritage Site',
@@ -83,6 +86,7 @@ export const tours: TourDto[] = [
         rating: 4.7,
         reviews: 203,
         price: '$620',
+        priceNumber: 620,
         description: 'Combine the vibrant street life and rich history of Hanoi with an unforgettable overnight cruise through the emerald waters of Ha Long Bay.',
         highlights: [
             'Overnight luxury cruise in Ha Long Bay',
@@ -107,6 +111,7 @@ export const tours: TourDto[] = [
         rating: 4.9,
         reviews: 157,
         price: '$310',
+        priceNumber: 310,
         description: 'Escape into northern Thailand’s misty mountains to interact ethically with rescued elephants and learn about indigenous hilltribe culture.',
         highlights: [
             'Ethical Elephant Nature Sanctuary visit & bathing',
@@ -129,6 +134,7 @@ export const tours: TourDto[] = [
         rating: 4.9,
         reviews: 312,
         price: '$280',
+        priceNumber: 280,
         description: 'Uncover the wonders of the ancient Khmer Empire with a deep dive into Siem Reap’s famous temple complexes.',
         highlights: [
             'Sunrise at iconic Angkor Wat',
@@ -151,6 +157,7 @@ export const tours: TourDto[] = [
         rating: 4.6,
         reviews: 74,
         price: '$980',
+        priceNumber: 980,
         description: 'Travel along the fertile waterways of Vietnam’s Mekong Delta, visiting floating markets, tropical orchards, and riverside villages.',
         highlights: [
             'Cai Rang Floating Market early morning boat trip',
@@ -177,6 +184,7 @@ export const tours: TourDto[] = [
         rating: 4.8,
         reviews: 91,
         price: '$1,540',
+        priceNumber: 1540,
         description: 'An epic cross-border journey connecting Thailand’s bustling capital, Cambodia’s ancient ruins, and the historic charm of Phnom Penh.',
         highlights: [
             'Bangkok Grand Palace & Wat Arun',

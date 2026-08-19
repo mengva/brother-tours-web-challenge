@@ -1,6 +1,6 @@
 import DestinationComponentPage from "@/components/destinations/Destination";
 import JsonLd from "@/components/seo/JsonLd";
-import { destinations } from "@/libs/data/destinations";
+import { destinations } from "@/data/destinations";
 import { breadcrumbSchema, destinationListSchema } from "@/utils/schema";
 import type { Metadata } from "next";
 

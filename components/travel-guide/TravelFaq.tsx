@@ -1,4 +1,4 @@
-import { travelGuidesFaqLists } from "@/libs/data/travel-guide";
+import { travelGuidesFaqLists } from "@/data/travel-guide";
 import { FaqListDto } from "@/types/travel-guide";
 import { HelpCircle, CheckCircle2 } from "lucide-react";
 

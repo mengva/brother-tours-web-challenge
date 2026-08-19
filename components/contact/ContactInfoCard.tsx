@@ -1,4 +1,5 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function ContactInfoCardPage() {
     return (
@@ -61,14 +62,11 @@ export default function ContactInfoCardPage() {
                     <h3 className="font-bold text-lg">Need Immediate Assistance?</h3>
                     <p className="text-emerald-200 text-sm">Chat directly with our team on WhatsApp</p>
                 </div>
-                <a
-                    href="https://wa.me/8562055123456"
-                    target="_blank"
-                    rel="noreferrer"
+                <div
                     className="bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-4 py-2 rounded-xl text-sm transition"
                 >
                     Chat Now
-                </a>
+                </div>
             </div>
         </div>
     )

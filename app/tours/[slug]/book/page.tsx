@@ -1,12 +1,12 @@
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
-import JsonLd from '@/components/seo/JsonLd';
-import { SITE_URL } from '@/utils/variable';
-import { tours } from '@/data/tour';
-import TourDetailComponentPage from '@/components/tours/slug/TourDetail';
-import { breadcrumbSchema, tourSchema } from '@/utils/schema';
-import { TourDto } from '@/types/tour';
 import { cache } from 'react';
+import { tours } from "@/data/tour";
+import { Metadata } from "next";
+import { SITE_URL } from '@/utils/variable';
+import BookFormTourComponentPage from '@/components/tours/slug/booking/BookForm';
+import { TourDto } from '@/types/tour';
+import { breadcrumbSchema } from '@/utils/schema';
+import JsonLd from '@/components/seo/JsonLd';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -29,37 +29,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
 
     return {
-        title: `${tour.title} | Brother Tours`,
-        description: tour.description,
+        title: `Book ${tour.title} | Brother Tours`,
+        description: `Book your spot for ${tour.title}. Fast and direct reservation with Brother Tours.`,
         alternates: {
+            // Point canonical back to main tour detail page to prevent duplicate content SEO penalties
             canonical: `${SITE_URL}/tours/${slug}`,
         },
         openGraph: {
-            title: `${tour.title} | Brother Tours`,
+            title: `Book ${tour.title} | Brother Tours`,
             description: tour.description,
-            url: `${SITE_URL}/tours/${slug}`,
+            url: `${SITE_URL}/tours/${slug}/book`,
             images: [tour.image],
         },
     };
 }
 
 function getJsonLd(tour: TourDto) {
-    // Generate structured data using reusable functions
     const breadcrumbsJsonLd = breadcrumbSchema([
         { name: "Home", url: "/" },
         { name: "Tours", url: "/tours" },
         { name: tour.title, url: `/tours/${tour.id}` },
+        { name: "Book Now", url: `/tours/${tour.id}/book` },
     ]);
-
-    const tourJsonLd = tourSchema(tour);
 
     return {
         breadcrumbsJsonLd,
-        tourJsonLd
-    }
+    };
 }
 
-export default async function TourDetailPage({ params }: PageProps) {
+export default async function BookingPage({ params }: PageProps) {
     const { slug } = await params;
     const tour = await getTourBySlug(slug);
 
@@ -67,17 +65,12 @@ export default async function TourDetailPage({ params }: PageProps) {
         notFound();
     }
 
-    const {
-        breadcrumbsJsonLd,
-        tourJsonLd
-    } = getJsonLd(tour);
-
+    const { breadcrumbsJsonLd } = getJsonLd(tour);
 
     return (
         <>
             <JsonLd data={breadcrumbsJsonLd} />
-            <JsonLd data={tourJsonLd} />
-            <TourDetailComponentPage tour={tour} slug={slug}/>
+            <BookFormTourComponentPage tour={tour} />
         </>
     );
 }

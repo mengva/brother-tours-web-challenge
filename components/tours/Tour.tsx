@@ -1,5 +1,6 @@
 import { TourDto } from "@/types/tour";
 import { Clock, MapPin, Star, Users } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function TourComponentPage({ tour }: { tour: TourDto }) {
@@ -7,9 +8,13 @@ export default function TourComponentPage({ tour }: { tour: TourDto }) {
         <div key={tour.id} className="group flex flex-col rounded-3xl bg-slate-50 border border-slate-200/60 overflow-hidden hover:shadow-xl transition-all duration-300">
             {/* Image & Badge */}
             <div className="relative h-60 w-full overflow-hidden">
-                <img
+                <Image
+                    priority
+                    width={100}
+                    height={100}
                     src={tour.image}
                     alt={tour.title}
+                    quality={80}
                     className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 flex items-center gap-1 rounded-full bg-white/90 backdrop-blur-md px-3 py-1 text-xs font-bold text-slate-800 shadow-sm">

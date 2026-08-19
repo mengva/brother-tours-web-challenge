@@ -1,4 +1,4 @@
-import { features } from "@/libs/data/tour";
+import { features } from "@/data/tour";
 
 export default function FeaturesPage() {
     return (

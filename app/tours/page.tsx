@@ -1,6 +1,6 @@
 import JsonLd from '@/components/seo/JsonLd';
 import TourComponentPage from '@/components/tours/Tour';
-import { tours } from '@/libs/data/tour';
+import { tours } from '@/data/tour';
 import { breadcrumbSchema, tourListSchema } from '@/utils/schema';
 import { Metadata } from 'next';
 

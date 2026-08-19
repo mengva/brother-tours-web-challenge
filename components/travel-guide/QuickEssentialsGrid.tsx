@@ -1,4 +1,4 @@
-import { travelGuidesCardLists } from "@/libs/data/travel-guide";
+import { travelGuidesCardLists } from "@/data/travel-guide";
 import { QuickInfoDto } from "@/types/travel-guide";
 
 export default function QuickEssentialsGridTravelGuidePage({ cards = travelGuidesCardLists }: { cards?: QuickInfoDto[] }) {

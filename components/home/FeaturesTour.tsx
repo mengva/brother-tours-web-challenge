@@ -1,4 +1,4 @@
-import { tours } from "@/libs/data/tour";
+import { tours } from "@/data/tour";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import TourComponentPage from "../tours/Tour";

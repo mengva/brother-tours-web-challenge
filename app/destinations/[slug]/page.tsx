@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/utils/variable";
-import { destinations } from "@/libs/data/destinations";
+import { destinations } from "@/data/destinations";
 import { breadcrumbSchema, destinationSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
 import DestinationDetailComponentPage from "@/components/destinations/slug/DestinationDetail";
 import { DestinationDto } from "@/types/destination";
+import { cache } from "react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,13 +17,14 @@ export async function generateStaticParams() {
 }
 
 // Helper to look up tour by ID or slug match
-function getDesticationBySlug(slug: string) {
+
+const getDesticationBySlug = cache(async (slug: string) => {
   return destinations.find(d => d.slug === slug);
-}
+});
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const destination = getDesticationBySlug(slug);
+  const destination = await getDesticationBySlug(slug);
 
   if (!destination) {
     return { title: "Destination Not Found" };
@@ -32,11 +34,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${destination.name} Tours & Travel Guide`,
     description: destination.description,
     alternates: {
-      canonical: `${SITE_URL}/destinations/${destination.slug}`,
+      canonical: `${SITE_URL}/destinations/${slug}`,
     },
     openGraph: {
       title: `${destination.name} Tours | Brother Tours`,
       description: destination.description,
+      url: `${SITE_URL}/destinations/${slug}`,
       images: [{ url: destination.heroImage }],
     },
   };
@@ -61,7 +64,7 @@ function getJsonLd(destination: DestinationDto) {
 
 export default async function DestinationDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const destination = getDesticationBySlug(slug);
+  const destination = await getDesticationBySlug(slug);
 
   if (!destination) {
     notFound();

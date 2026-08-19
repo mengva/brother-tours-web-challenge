@@ -1,17 +1,22 @@
 import { DestinationDto } from "@/types/destination";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function DestinationComponentPage({ destination }: { destination: DestinationDto }) {
     return (
         <Link
             key={destination.slug}
-            href={`/destination/${destination.slug}`}
+            href={`/destinations/${destination.slug}`}
             className="group relative flex h-72 overflow-hidden rounded-2xl bg-stone-100 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
             {/* Background Image */}
-            <img
+            <Image
+                priority
+                width={100}
+                height={100}
                 src={destination.heroImage}
                 alt={destination.name}
+                quality={80}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 
             />

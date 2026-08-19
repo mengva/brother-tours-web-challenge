@@ -1,5 +1,5 @@
-import { destinations } from "@/libs/data/destinations";
-import { tours } from "@/libs/data/tour";
+import { destinations } from "@/data/destinations";
+import { tours } from "@/data/tour";
 import { SITE_URL } from "@/utils/variable";
 import type { MetadataRoute } from "next";
 // import { db } from "@/db"; // Uncomment when ready for Drizzle

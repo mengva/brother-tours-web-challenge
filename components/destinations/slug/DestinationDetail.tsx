@@ -1,4 +1,5 @@
 import { DestinationDto } from "@/types/destination";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function DestinationDetailComponentPage({ destination }: { destination: DestinationDto }) {
@@ -6,7 +7,11 @@ export default function DestinationDetailComponentPage({ destination }: { destin
         <main className="min-h-screen bg-stone-50 pb-16">
             {/* Hero Banner */}
             <section className="relative h-[50vh] min-h-[360px] w-full overflow-hidden bg-stone-900">
-                <img
+                <Image
+                    priority
+                    width={100}
+                    height={100}
+                    quality={80}
                     src={destination.heroImage}
                     alt={destination.name}
                     className="h-full w-full object-cover opacity-75"

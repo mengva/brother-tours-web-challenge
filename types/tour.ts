@@ -13,6 +13,7 @@ export interface TourDto {
   rating: number;
   reviews: number;
   price: string;
+  priceNumber: number;
   description?: string;
   highlights?: string[];
   itinerary?: ItineraryItemDto[];

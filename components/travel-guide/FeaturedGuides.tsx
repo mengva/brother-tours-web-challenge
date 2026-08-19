@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Clock, ArrowRight } from "lucide-react";
-import { travelGuidesList } from "@/libs/data/travel-guide";
+import { travelGuidesList } from "@/data/travel-guide";
 import { GuideCardDto } from "@/types/travel-guide";
 
 export default function FeaturedGuidesPage({ guides = travelGuidesList }: { guides?: GuideCardDto[] }) {

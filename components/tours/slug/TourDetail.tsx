@@ -1,13 +1,19 @@
 import { TourDto } from "@/types/tour";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function TourDetailComponentPage({ tour }: { tour: TourDto }) {
+export default function TourDetailComponentPage({ tour, slug }: { tour: TourDto; slug: string }) {
     return (
         <main className="container mx-auto py-10 px-4 max-w-5xl">
             {/* Hero Header */}
             <div className="relative h-96 rounded-2xl overflow-hidden mb-8 shadow-lg">
-                <img
+                <Image
+                    priority
+                    width={100}
+                    height={100}
                     src={tour.image}
                     alt={tour.title}
+                    quality={80}
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-8">
@@ -71,9 +77,12 @@ export default function TourDetailComponentPage({ tour }: { tour: TourDto }) {
                             <span>({tour.reviews} reviews)</span>
                         </div>
 
-                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition mb-3">
-                            Book Now
-                        </button>
+                        <Link href={`/tours/${slug}/book`}>
+                            <button className="w-full bg-blue-600 cursor-pointer hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition mb-3">
+                                Book Now
+                            </button>
+                        </Link>
+
                     </div>
                 </aside>
             </div>

@@ -7,7 +7,7 @@ import CtaBannerTravelGuidePage from "@/components/travel-guide/CtaBanner";
 import { SITE_URL } from "@/utils/variable";
 import { breadcrumbSchema, faqSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
-import { travelGuidesFaqLists } from "@/libs/data/travel-guide";
+import { travelGuidesFaqLists } from "@/data/travel-guide";
 
 export const metadata: Metadata = {
   title: "Laos Travel Guide & Essential Tips 2026 | Brother Tour",

@@ -12,7 +12,7 @@ export default function HeaderPage() {
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-8">
 
         {/* 1. Logo Section */}
-        <BrotherTourLogoLinkPage width={100} height={100} />
+        <BrotherTourLogoLinkPage width={90} height={90} />
 
         {/* 2. Desktop Radix Navigation Menu */}
         <DesktopNavigationPage/>
