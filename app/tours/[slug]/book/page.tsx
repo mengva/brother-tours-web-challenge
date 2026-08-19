@@ -4,7 +4,7 @@ import { SITE_URL } from '@/utils/variable';
 import BookFormTourComponentPage from '@/components/tours/slug/booking/BookForm';
 import JsonLd from '@/components/seo/JsonLd';
 import { getTourBySlug } from '@/libs/tours/tours';
-import { getTourBookJsonLd } from '@/utils/seo/tours/slug/book/book';
+import { getTourBookJsonLd } from '@/utils/seo/tours/tourSlugBook';
 
 interface PageProps {
     params: Promise<{ slug: string }>;

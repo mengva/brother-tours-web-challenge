@@ -4,8 +4,8 @@ import { SITE_URL } from "@/utils/variable";
 import { destinations } from "@/data/destinations";
 import JsonLd from "@/components/seo/JsonLd";
 import DestinationDetailComponentPage from "@/components/destinations/slug/DestinationDetail";
-import { getDestinationSlugJsonLd } from "@/utils/seo/destinations/slug/destinationSlug";
-import { getDestinationBySlug } from "@/libs/destinations/slug/destinationSlug";
+import { getDestinationSlugJsonLd } from "@/utils/seo/destinations/destinationSlug";
+import { getDestinationBySlug } from "@/libs/destinations/destinationSlug";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
