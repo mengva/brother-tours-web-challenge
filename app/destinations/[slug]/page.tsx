@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/utils/variable";
 import { destinations } from "@/data/destinations";
-import { breadcrumbSchema, destinationSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
 import DestinationDetailComponentPage from "@/components/destinations/slug/DestinationDetail";
-import { DestinationDto } from "@/types/destination";
-import { cache } from "react";
+import { getDestinationSlugJsonLd } from "@/utils/seo/destinations/slug/destinationSlug";
+import { getDestinationBySlug } from "@/libs/destinations/slug/destinationSlug";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -18,13 +17,9 @@ export async function generateStaticParams() {
 
 // Helper to look up tour by ID or slug match
 
-const getDesticationBySlug = cache(async (slug: string) => {
-  return destinations.find(d => d.slug === slug);
-});
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const destination = await getDesticationBySlug(slug);
+  const destination = await getDestinationBySlug(slug);
 
   if (!destination) {
     return { title: "Destination Not Found" };
@@ -45,26 +40,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function getJsonLd(destination: DestinationDto) {
-
-  // Generate structured data using reusable functions
-  const breadcrumbsJsonLd = breadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Destinations", url: "/destinations" },
-    { name: destination.name, url: `/destinations/${destination.slug}` },
-  ]);
-
-  const destinationJsonLd = destinationSchema(destination);
-
-  return {
-    breadcrumbsJsonLd,
-    destinationJsonLd
-  }
-}
 
 export default async function DestinationDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const destination = await getDesticationBySlug(slug);
+  const destination = await getDestinationBySlug(slug);
 
   if (!destination) {
     notFound();
@@ -73,7 +52,7 @@ export default async function DestinationDetailPage({ params }: PageProps) {
   const {
     breadcrumbsJsonLd,
     destinationJsonLd
-  } = getJsonLd(destination);
+  } = getDestinationSlugJsonLd(destination);
 
   return (
     <>

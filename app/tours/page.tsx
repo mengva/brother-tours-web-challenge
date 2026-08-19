@@ -1,7 +1,7 @@
 import JsonLd from '@/components/seo/JsonLd';
 import TourComponentPage from '@/components/tours/Tour';
 import { tours } from '@/data/tour';
-import { breadcrumbSchema, tourListSchema } from '@/utils/schema';
+import { tourBreadcrumbsJsonLd, tourListJsonLd } from '@/utils/seo/tours/tour';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,27 +10,12 @@ export const metadata: Metadata = {
     alternates: { canonical: "/tours" },
 };
 
-// 1. Breadcrumbs Schema (Home -> Tours)
-const breadcrumbsJsonLd = breadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Tours", url: "/tours" },
-]);
-
-// 2. ItemList Schema ສໍາລັບໜ້າ Listing
-const tourListJsonLd = tourListSchema(
-    "Popular All Tour Packages",
-    tours.map((tour) => ({
-        name: tour.title,
-        url: `/tours/${tour.id}`,
-    }))
-);
-
 function TourPage() {
 
     return (
         <>
             {/* Inject Structured Data */}
-            <JsonLd data={breadcrumbsJsonLd} />
+            <JsonLd data={tourBreadcrumbsJsonLd} />
             <JsonLd data={tourListJsonLd} />
 
             {/* 3. FEATURED TOURS */}

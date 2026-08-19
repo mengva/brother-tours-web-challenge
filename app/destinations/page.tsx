@@ -1,7 +1,7 @@
 import DestinationComponentPage from "@/components/destinations/Destination";
 import JsonLd from "@/components/seo/JsonLd";
 import { destinations } from "@/data/destinations";
-import { breadcrumbSchema, destinationListSchema } from "@/utils/schema";
+import { destinationBreadcrumbsJsonLd, destinationListJsonLd } from "@/utils/seo/destinations/destination";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,24 +10,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/destinations" },
 };
 
-// 1. Breadcrumbs Schema (Home -> Tours)
-const breadcrumbsJsonLd = breadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Destinations", url: "/destinations" },
-]);
-
-const destinationListJsonLd = destinationListSchema(
-  "Destinations | Brother Tours",
-  destinations.map((destination) => ({
-    name: destination.name,
-    url: `/tours/${destination.slug}`,
-  }))
-);
-
 export default function DestinationsPage() {
   return (
     <>
-      <JsonLd data={breadcrumbsJsonLd} />
+      <JsonLd data={destinationBreadcrumbsJsonLd} />
       <JsonLd data={destinationListJsonLd} />
 
       <div className="mx-auto max-w-5xl px-4 py-10 lg:px-6">

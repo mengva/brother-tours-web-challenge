@@ -6,8 +6,8 @@ import StorySectionAboutPage from "@/components/about/StorySection";
 import CoreValueSectionAboutPage from "@/components/about/CoreValueSection";
 import CTABannerAboutPage from "@/components/about/CTABanner";
 import { SITE_URL } from "@/utils/variable";
-import { breadcrumbSchema, organizationSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
+import { aboutBreadcrumbsJsonLd, aboutOrganizationJsonLd } from "@/utils/seo/about/about";
 
 export const metadata: Metadata = {
   title: "About Us | Brother Tour & Travels Laos",
@@ -31,32 +31,14 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbsJsonLd = breadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "About Us", url: "/about" },
-]);
-
-const organizationJsonLd = organizationSchema({
-  phone: "+856 20 1234 5678",
-  email: "contact@brothertours.com",
-  address: "Lane Xang Avenue",
-  city: "Vientiane",
-  socialLinks: [
-    "https://facebook.com/your-page",
-    "https://instagram.com/your-profile",
-    "https://tiktok.com/@your-handle",
-    "https://youtube.com/@your-channel",
-  ],
-});
-
 export default function AboutPage() {
 
 
   return (
     <>
 
-      <JsonLd data={breadcrumbsJsonLd} />
-      <JsonLd data={organizationJsonLd} />
+      <JsonLd data={aboutBreadcrumbsJsonLd} />
+      <JsonLd data={aboutOrganizationJsonLd} />
 
       <div className="min-h-screen bg-slate-50 text-slate-800">
 

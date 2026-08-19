@@ -3,8 +3,8 @@ import InquiryFormContactPage from "@/components/contact/InquiryFormContact";
 import ContactInfoCardPage from "@/components/contact/ContactInfoCard";
 import HeroHeaderContactPage from "@/components/contact/HeroHeader";
 import { SITE_URL } from "@/utils/variable";
-import { breadcrumbSchema, organizationSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
+import { contactBreadcrumbsJsonLd, contactOrganizationJsonLd } from "@/utils/seo/contact/contact";
 
 export const metadata: Metadata = {
   title: "Contact Us & Tour Inquiry | Brother Tour Laos",
@@ -28,30 +28,12 @@ export const metadata: Metadata = {
   },
 };
 
-const breadcrumbsJsonLd = breadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Contact Us", url: "/contact" },
-]);
-
-const organizationJsonLd = organizationSchema({
-  phone: "+856 20 1234 5678",
-  email: "contact@brothertours.com",
-  address: "Lane Xang Avenue",
-  city: "Vientiane",
-  socialLinks: [
-    "https://facebook.com/your-page",
-    "https://instagram.com/your-profile",
-    "https://tiktok.com/@your-handle",
-    "https://youtube.com/@your-channel",
-  ],
-});
-
 export default function BrotherTourContactPage() {
 
   return (
     <>
-      <JsonLd data={breadcrumbsJsonLd} />
-      <JsonLd data={organizationJsonLd} />
+      <JsonLd data={contactBreadcrumbsJsonLd} />
+      <JsonLd data={contactOrganizationJsonLd} />
 
       <div className="min-h-screen bg-slate-50 text-slate-800">
         {/* Hero Header */}

@@ -2,20 +2,13 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import JsonLd from '@/components/seo/JsonLd';
 import { SITE_URL } from '@/utils/variable';
-import { tours } from '@/data/tour';
 import TourDetailComponentPage from '@/components/tours/slug/TourDetail';
-import { breadcrumbSchema, tourSchema } from '@/utils/schema';
-import { TourDto } from '@/types/tour';
-import { cache } from 'react';
+import { getTourBySlug } from '@/libs/tours/tours';
+import { getTourSlugJsonLd } from '@/utils/seo/tours/slug/tourSlug';
 
 interface PageProps {
     params: Promise<{ slug: string }>;
 }
-
-// Wrap with cache() for performance optimization
-const getTourBySlug = cache(async (slug: string) => {
-    return tours.find(tour => tour.id === slug || tour.title === slug);
-});
 
 // 1. Dynamic Metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -43,22 +36,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-function getJsonLd(tour: TourDto) {
-    // Generate structured data using reusable functions
-    const breadcrumbsJsonLd = breadcrumbSchema([
-        { name: "Home", url: "/" },
-        { name: "Tours", url: "/tours" },
-        { name: tour.title, url: `/tours/${tour.id}` },
-    ]);
-
-    const tourJsonLd = tourSchema(tour);
-
-    return {
-        breadcrumbsJsonLd,
-        tourJsonLd
-    }
-}
-
 export default async function TourDetailPage({ params }: PageProps) {
     const { slug } = await params;
     const tour = await getTourBySlug(slug);
@@ -70,7 +47,7 @@ export default async function TourDetailPage({ params }: PageProps) {
     const {
         breadcrumbsJsonLd,
         tourJsonLd
-    } = getJsonLd(tour);
+    } = getTourSlugJsonLd(tour);
 
 
     return (

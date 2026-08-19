@@ -5,9 +5,8 @@ import FeaturedGuidesPage from "@/components/travel-guide/FeaturedGuides";
 import TravelFaqTravelGuidePage from "@/components/travel-guide/TravelFaq";
 import CtaBannerTravelGuidePage from "@/components/travel-guide/CtaBanner";
 import { SITE_URL } from "@/utils/variable";
-import { breadcrumbSchema, faqSchema } from "@/utils/schema";
 import JsonLd from "@/components/seo/JsonLd";
-import { travelGuidesFaqLists } from "@/data/travel-guide";
+import { travelGuidesBreadcrumbsJsonLd, travelGuidesFaqListJsonLd } from "@/utils/seo/travel-guide/travel-guide";
 
 export const metadata: Metadata = {
   title: "Laos Travel Guide & Essential Tips 2026 | Brother Tour",
@@ -25,24 +24,10 @@ export const metadata: Metadata = {
   },
 };
 
-// Breadcrumbs
-const breadcrumbsJsonLd = breadcrumbSchema([
-  { name: "Home", url: "/" },
-  { name: "Travel Guide", url: "/travel-guide" },
-]);
-
-// FAQ Schema
-const travelGuidesFaqListJsonLd = faqSchema(
-  travelGuidesFaqLists.map((tr) => ({
-    question: tr.question,
-    answer: tr.answer,
-  }))
-);
-
 export default function TravelGuidePage() {
   return (
     <>
-      <JsonLd data={breadcrumbsJsonLd} />
+      <JsonLd data={travelGuidesBreadcrumbsJsonLd} />
       <JsonLd data={travelGuidesFaqListJsonLd} />
 
       <div className="min-h-screen bg-slate-50 text-slate-800">
