@@ -18,7 +18,7 @@ import {
     AlertCircle
 } from "lucide-react";
 import { TourDto } from "@/types/tour";
-import { BookingFormData, bookingSchema } from "@/validations/tour/slug/book";
+import { BookingFormData, bookingSchema } from "@/validations/tours/tourSlugBook";
 
 export default function BookFormTourComponentPage({
     tour
