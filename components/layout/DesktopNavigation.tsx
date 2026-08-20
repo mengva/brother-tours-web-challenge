@@ -17,7 +17,7 @@ export default function DesktopNavigationPage() {
 
     return (
         <>
-            <NavigationMenu.Root className="relative z-10 hidden md:flex items-center justify-center">
+            <NavigationMenu.Root className="relative z-10 hidden lg:flex items-center justify-center">
                 <NavigationMenu.List className="flex items-center gap-1 list-none m-0 p-0">
                     {navigationList.map((item) => {
                         const Icon = item.icon;
@@ -50,7 +50,7 @@ export default function DesktopNavigationPage() {
                                                     <Link
                                                         key={index}
                                                         href={child.href}
-                                                        className={`p-2 text-sm font-medium ${isChildActive
+                                                        className={`p-2 text-sm font-medium className='text-nowrap' ${isChildActive
                                                             ? 'text-amber-600 bg-amber-50'
                                                             : 'text-slate-600 hover:text-amber-600 hover:bg-slate-50'
                                                             } rounded-lg transition-colors flex items-center gap-2.5`}
@@ -76,7 +76,7 @@ export default function DesktopNavigationPage() {
                                         }`}
                                 >
                                     <Icon className="h-4 w-4" />
-                                    <span>{item.name}</span>
+                                    <span className='text-nowrap text-ms'>{item.name}</span>
                                 </Link>
                             </NavigationMenu.Item>
                         );

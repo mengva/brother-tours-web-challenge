@@ -40,7 +40,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-
 export default async function DestinationDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const destination = await getDestinationBySlug(slug);

@@ -30,7 +30,7 @@ export default function MobileNavigationPage() {
     return (
         <>
             <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <Dialog.Trigger asChild className="md:hidden">
+                <Dialog.Trigger asChild className="lg:hidden">
                     <button
                         className="p-2.5 text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
                         aria-label="Open Navigation Menu"
@@ -130,7 +130,7 @@ export default function MobileNavigationPage() {
                             <Link
                                 href="/tours"
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="w-full py-3 text-center rounded-xl bg-amber-500 text-white font-bold shadow-lg shadow-amber-500/20 active:scale-95 transition-all"
+                                className="text-nowrap w-full py-3 text-center rounded-xl bg-amber-500 text-white font-bold shadow-lg shadow-amber-500/20 active:scale-95 transition-all"
                             >
                                 Book A Tour Now
                             </Link>
