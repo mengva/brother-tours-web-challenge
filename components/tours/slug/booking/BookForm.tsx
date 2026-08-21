@@ -130,10 +130,11 @@ export default function BookFormTourComponentPage({
                         {/* Travel Date & Guests */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-1.5">
-                                <label className="block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                                <label htmlFor="bookingDate" className="text-sm font-bold text-slate-700 flex items-center gap-1.5">
                                     <Calendar className="w-4 h-4 text-amber-500" /> Travel Date
                                 </label>
                                 <input
+                                id="bookingDate"
                                     type="date"
                                     {...register("date")}
                                     className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500 outline-none text-slate-800 text-sm"
@@ -146,7 +147,7 @@ export default function BookFormTourComponentPage({
                             </div>
 
                             <div className="space-y-1.5">
-                                <label className="block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                                <label className="text-sm font-bold text-slate-700 flex items-center gap-1.5">
                                     <Users className="w-4 h-4 text-amber-500" /> Number of Guests
                                 </label>
                                 <div className="flex gap-2">
@@ -186,7 +187,7 @@ export default function BookFormTourComponentPage({
                             <h3 className="text-base font-bold text-slate-900">Contact Details</h3>
 
                             <div className="space-y-1.5">
-                                <label className="block text-xs font-semibold text-slate-600 flex items-center gap-1">
+                                <label className="text-xs font-semibold text-slate-600 flex items-center gap-1">
                                     <User className="w-3.5 h-3.5" /> Full Name
                                 </label>
                                 <input
@@ -204,7 +205,7 @@ export default function BookFormTourComponentPage({
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="space-y-1.5">
-                                    <label className="block text-xs font-semibold text-slate-600 flex items-center gap-1">
+                                    <label className="text-xs font-semibold text-slate-600 flex items-center gap-1">
                                         <Mail className="w-3.5 h-3.5" /> Email
                                     </label>
                                     <input
@@ -221,7 +222,7 @@ export default function BookFormTourComponentPage({
                                 </div>
 
                                 <div className="space-y-1.5">
-                                    <label className="block text-xs font-semibold text-slate-600 flex items-center gap-1">
+                                    <label className="text-xs font-semibold text-slate-600 flex items-center gap-1">
                                         <Phone className="w-3.5 h-3.5" /> Phone / WhatsApp
                                     </label>
                                     <input
@@ -239,7 +240,7 @@ export default function BookFormTourComponentPage({
                             </div>
 
                             <div className="space-y-1.5">
-                                <label className="block text-xs font-semibold text-slate-600 flex items-center gap-1">
+                                <label className="text-xs font-semibold text-slate-600 flex items-center gap-1">
                                     <MessageSquare className="w-3.5 h-3.5" /> Special Requests
                                 </label>
                                 <textarea

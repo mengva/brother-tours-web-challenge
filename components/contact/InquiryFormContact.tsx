@@ -45,8 +45,8 @@ export default function InquiryFormContactPage() {
                                 placeholder="John Doe"
                                 {...register("name")}
                                 className={`w-full px-4 py-2.5 rounded-xl border focus:outline-none focus:ring-2 transition ${errors.name
-                                        ? "border-red-500 focus:ring-red-500/20"
-                                        : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                    ? "border-red-500 focus:ring-red-500/20"
+                                    : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
                                     }`}
                             />
                             {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
@@ -59,8 +59,8 @@ export default function InquiryFormContactPage() {
                                 placeholder="john@example.com"
                                 {...register("email")}
                                 className={`w-full px-4 py-2.5 rounded-xl border focus:outline-none focus:ring-2 transition ${errors.email
-                                        ? "border-red-500 focus:ring-red-500/20"
-                                        : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                    ? "border-red-500 focus:ring-red-500/20"
+                                    : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
                                     }`}
                             />
                             {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
@@ -76,16 +76,17 @@ export default function InquiryFormContactPage() {
                                 placeholder="+856 20 ..."
                                 {...register("phone")}
                                 className={`w-full px-4 py-2.5 rounded-xl border focus:outline-none focus:ring-2 transition ${errors.phone
-                                        ? "border-red-500 focus:ring-red-500/20"
-                                        : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                    ? "border-red-500 focus:ring-red-500/20"
+                                    : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
                                     }`}
                             />
                             {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Target Destination</label>
+                            <label htmlFor="destination" className="block text-sm font-medium text-slate-700 mb-1">Target Destination</label>
                             <select
+                                id="destination"
                                 {...register("destination")}
                                 className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition bg-white"
                             >
@@ -102,27 +103,29 @@ export default function InquiryFormContactPage() {
                     {/* Date & Travelers Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Estimated Travel Date</label>
+                            <label htmlFor="date" className="block text-sm font-medium text-slate-700 mb-1">Estimated Travel Date</label>
                             <input
+                                id="date"
                                 type="date"
                                 {...register("date")}
                                 className={`w-full px-4 py-2.5 rounded-xl border focus:outline-none focus:ring-2 transition ${errors.date
-                                        ? "border-red-500 focus:ring-red-500/20"
-                                        : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                    ? "border-red-500 focus:ring-red-500/20"
+                                    : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
                                     }`}
                             />
                             {errors.date && <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>}
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Number of Travelers</label>
+                            <label htmlFor="number" className="block text-sm font-medium text-slate-700 mb-1">Number of Travelers</label>
                             <input
+                                id="number"
                                 type="number"
                                 min="1"
                                 {...register("travelers")}
                                 className={`w-full px-4 py-2.5 rounded-xl border focus:outline-none focus:ring-2 transition ${errors.travelers
-                                        ? "border-red-500 focus:ring-red-500/20"
-                                        : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                    ? "border-red-500 focus:ring-red-500/20"
+                                    : "border-slate-200 focus:ring-emerald-500/20 focus:border-emerald-500"
                                     }`}
                             />
                             {errors.travelers && <p className="text-red-500 text-xs mt-1">{errors.travelers.message}</p>}
