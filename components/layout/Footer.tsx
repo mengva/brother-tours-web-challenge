@@ -8,7 +8,7 @@ import {
 import { FaFacebook } from 'react-icons/fa';
 import { BsInstagram, BsWhatsapp, BsYoutube } from 'react-icons/bs';
 import { navigationList } from '@/utils/navigation';
-import BrotherTourLogoLinkPage from '../BrotherTourLogo';
+import BrotherTourLogoLinkPage from '../ui/BrotherTourLogo';
 import FooterFormPage from './FooterForm';
 
 export default function FooterPage() {

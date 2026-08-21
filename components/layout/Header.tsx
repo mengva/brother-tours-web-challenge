@@ -2,7 +2,7 @@ import Link from 'next/link';
 import {
   Calendar
 } from 'lucide-react';
-import BrotherTourLogoLinkPage from '../BrotherTourLogo';
+import BrotherTourLogoLinkPage from '../ui/BrotherTourLogo';
 import DesktopNavigationPage from './DesktopNavigation';
 import MobileNavigationPage from './MobileNavigation';
 
