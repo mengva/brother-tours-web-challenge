@@ -50,8 +50,8 @@ export default function HeroSectionPage() {
                     <div className="flex items-center gap-3 px-4 py-2 rounded-2xl md:rounded-full hover:bg-slate-50 transition-colors border-t md:border-t-0 md:border-l border-slate-100">
                         <Compass className="h-5 w-5 text-amber-500 shrink-0" />
                         <div className="flex flex-col text-left w-full">
-                            <span className="text-[10px] uppercase font-bold text-slate-400">Tour Type</span>
-                            <select className="w-full text-sm font-semibold bg-transparent border-none outline-none text-slate-700 cursor-pointer">
+                            <label htmlFor="tourType" className="text-[10px] uppercase font-bold text-slate-400">Tour Type</label>
+                            <select id="tourType" className="w-full text-sm font-semibold bg-transparent border-none outline-none text-slate-700 cursor-pointer">
                                 <option value="">All Types</option>
                                 <option value="cultural">Cultural & Heritage</option>
                                 <option value="adventure">Adventure & Nature</option>
@@ -64,8 +64,8 @@ export default function HeroSectionPage() {
                     <div className="flex items-center gap-3 px-4 py-2 rounded-2xl md:rounded-full hover:bg-slate-50 transition-colors border-t md:border-t-0 md:border-l border-slate-100">
                         <Calendar className="h-5 w-5 text-amber-500 shrink-0" />
                         <div className="flex flex-col text-left w-full">
-                            <span className="text-[10px] uppercase font-bold text-slate-400">Duration</span>
-                            <select className="w-full text-sm font-semibold bg-transparent border-none outline-none text-slate-700 cursor-pointer">
+                            <label htmlFor="duration" className="text-[10px] uppercase font-bold text-slate-400">duration</label>
+                            <select id="duration" className="w-full text-sm font-semibold bg-transparent border-none outline-none text-slate-700 cursor-pointer">
                                 <option value="">Any Days</option>
                                 <option value="1-3">1 - 3 Days</option>
                                 <option value="4-7">4 - 7 Days</option>
