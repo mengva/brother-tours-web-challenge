@@ -1,5 +1,5 @@
 import Image from "next/image";
-import brotherToursLogo from "../public/images/brother_tours.png";
+import brotherToursLogo from "../../public/images/brother_tours.png";
 import Link from "next/link";
 
 function BrotherTourLogoLinkPage({
